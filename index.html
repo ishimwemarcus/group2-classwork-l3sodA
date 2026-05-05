@@ -35,8 +35,8 @@
             </a>
             <div class="nav-actions">
                 <a href="#opening" class="btn-primary" id="btn-opening">OPENING TIMES</a>
-                <a href="#find-us" class="btn-primary">FIND US</a>
-                <a href="#order" class="btn-white">ORDER NOW</a>
+                <a href="#find-us" class="btn-primary" id="btn-findus">FIND US</a>
+                <a href="#order" class="btn-white" id="btn-order">ORDER NOW</a>
                 <button class="btn-hamburger" id="hamburger-menu" aria-label="Menu">
                     <span class="line"></span>
                     <span class="line"></span>
@@ -212,6 +212,65 @@
     <button id="back-to-top" class="back-to-top">
         <span class="arrow-up">↑</span>
     </button>
+
+    <!-- Opening Times Modal -->
+    <div id="modal-opening" class="modal-overlay">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <span class="showcase-tag">SCHEDULE</span>
+            <h2>OPENING <span class="serif-italic">Times</span></h2>
+            <div class="schedule-grid">
+                <div class="schedule-row">
+                    <span>Monday - Thursday</span>
+                    <span>11:00 AM - 10:00 PM</span>
+                </div>
+                <div class="schedule-row">
+                    <span>Friday - Saturday</span>
+                    <span>10:00 AM - 11:30 PM</span>
+                </div>
+                <div class="schedule-row">
+                    <span>Sunday</span>
+                    <span>12:00 PM - 9:00 PM</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Find Us Modal -->
+    <div id="modal-findus" class="modal-overlay">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <span class="showcase-tag">LOCATION</span>
+            <h2>FIND <span class="serif-italic">Us</span></h2>
+            <p class="modal-desc">123 Flame Avenue, Kigali, Rwanda</p>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127606.58156157833!2d30.0076295!3d-1.954753!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19dca4258ed8e797%3A0xf32236814c173516!2sKigali%2C%20Rwanda!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" width="100%" height="250" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Sidebar -->
+    <div id="sidebar-order" class="sidebar-overlay">
+        <div class="sidebar-backdrop"></div>
+        <div class="sidebar-content">
+            <button class="close-sidebar">&times;</button>
+            <span class="showcase-tag">DELIVERY & PICKUP</span>
+            <h2>ORDER <span class="serif-italic">Now</span></h2>
+            <p class="modal-desc">Choose your preferred way to enjoy Sacha's Taste.</p>
+            <div class="order-options">
+                <a href="#" class="order-btn delivery-btn">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M5 18H3c-.6 0-1-.4-1-1V7c0-.6.4-1 1-1h10c.6 0 1 .4 1 1v11"></path><path d="M14 9h4l4 4v4c0 .6-.4 1-1 1h-2"></path><circle cx="7" cy="18" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>
+                    <span>Order Delivery (Vuba Vuba)</span>
+                </a>
+                <a href="#" class="order-btn pickup-btn">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    <span>Order Pickup (WhatsApp)</span>
+                </a>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

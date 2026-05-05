@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initBackToTop();
     initMovingImageHover();
     initMobileMenu();
+    initModalsAndSidebar();
 });
 
 /**
@@ -58,6 +59,85 @@ function initMobileMenu() {
             document.body.style.overflow = '';
         });
     });
+}
+
+/**
+ * Modals and Sidebar: GSAP powered popups for Opening, Find Us, and Order Now.
+ */
+function initModalsAndSidebar() {
+    // Selectors
+    const btnOpening = document.getElementById('btn-opening');
+    const modalOpening = document.getElementById('modal-opening');
+    
+    const btnFindUs = document.getElementById('btn-findus');
+    const modalFindUs = document.getElementById('modal-findus');
+    
+    const btnOrder = document.getElementById('btn-order');
+    const sidebarOrder = document.getElementById('sidebar-order');
+
+    // Helper function to create GSAP timeline for modals
+    const createModalTimeline = (overlay) => {
+        if (!overlay) return null;
+        const backdrop = overlay.querySelector('.modal-backdrop') || overlay.querySelector('.sidebar-backdrop');
+        const content = overlay.querySelector('.modal-content') || overlay.querySelector('.sidebar-content');
+        const closeBtn = overlay.querySelector('.close-modal') || overlay.querySelector('.close-sidebar');
+        
+        gsap.set(overlay, { pointerEvents: "none" });
+
+        const tl = gsap.timeline({ paused: true, reversed: true });
+        
+        // For Modals
+        if (overlay.classList.contains('modal-overlay')) {
+            tl.set(overlay, { pointerEvents: "auto" })
+              .to(backdrop, { duration: 0.4, opacity: 1, ease: "power2.inOut" })
+              .to(content, { duration: 0.5, opacity: 1, y: 0, scale: 1, ease: "back.out(1.5)" }, "-=0.2");
+        } 
+        // For Sidebar
+        else if (overlay.classList.contains('sidebar-overlay')) {
+            tl.set(overlay, { pointerEvents: "auto" })
+              .to(backdrop, { duration: 0.4, opacity: 1, ease: "power2.inOut" })
+              .to(content, { duration: 0.5, x: 0, ease: "power3.out" }, "-=0.3");
+        }
+
+        const close = () => {
+            tl.reverse();
+            document.body.style.overflow = '';
+        };
+
+        if (closeBtn) closeBtn.addEventListener('click', close);
+        if (backdrop) backdrop.addEventListener('click', close);
+
+        return tl;
+    };
+
+    const tlOpening = createModalTimeline(modalOpening);
+    const tlFindUs = createModalTimeline(modalFindUs);
+    const tlOrder = createModalTimeline(sidebarOrder);
+
+    // Event Listeners
+    if (btnOpening && tlOpening) {
+        btnOpening.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.body.style.overflow = 'hidden';
+            tlOpening.play();
+        });
+    }
+
+    if (btnFindUs && tlFindUs) {
+        btnFindUs.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.body.style.overflow = 'hidden';
+            tlFindUs.play();
+        });
+    }
+
+    if (btnOrder && tlOrder) {
+        btnOrder.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.body.style.overflow = 'hidden';
+            tlOrder.play();
+        });
+    }
 }
 
 /**
