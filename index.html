@@ -33,15 +33,37 @@
             <a href="#" class="nav-logo">
                 <img src="assets/brand-logo.png" alt="Sacha's Taste" class="main-logo-img">
             </a>
-            <nav class="nav-links">
-                <a href="#hero">HOME</a>
-                <a href="#story">OUR STORY</a>
-                <a href="#menu">MENU</a>
-                <a href="#find-us">CONTACT</a>
-            </nav>
-            <a href="#order" class="btn-cta">ORDER NOW</a>
+            <div class="nav-actions">
+                <a href="#opening" class="btn-primary" id="btn-opening">OPENING TIMES</a>
+                <a href="#find-us" class="btn-primary">FIND US</a>
+                <a href="#order" class="btn-white">ORDER NOW</a>
+                <button class="btn-hamburger" id="hamburger-menu" aria-label="Menu">
+                    <span class="line"></span>
+                    <span class="line"></span>
+                </button>
+            </div>
         </div>
     </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="mobile-menu">
+        <div class="mobile-menu-inner">
+            <button id="close-menu" class="close-menu" aria-label="Close Menu">
+                <span class="line line1"></span>
+                <span class="line line2"></span>
+            </button>
+            <nav class="mobile-links">
+                <a href="#hero" class="mobile-link" data-text="HOME">HOME</a>
+                <a href="#story" class="mobile-link" data-text="OUR STORY">OUR STORY</a>
+                <a href="#menu" class="mobile-link" data-text="MENU">MENU</a>
+                <a href="#find-us" class="mobile-link" data-text="CONTACT">CONTACT</a>
+            </nav>
+            <div class="mobile-footer">
+                <p>Kigali, Rwanda</p>
+                <p>+250 123 456 789</p>
+            </div>
+        </div>
+    </div>
 
     <main>
         <!-- Hero Section -->

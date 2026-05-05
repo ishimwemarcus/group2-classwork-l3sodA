@@ -8,7 +8,57 @@ document.addEventListener('DOMContentLoaded', () => {
     initCustomCursor();
     initBackToTop();
     initMovingImageHover();
+    initMobileMenu();
 });
+
+/**
+ * Mobile Menu: GSAP powered full screen menu overlay.
+ */
+function initMobileMenu() {
+    const hamburgerBtn = document.getElementById('hamburger-menu');
+    const closeBtn = document.getElementById('close-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+    
+    if (!hamburgerBtn || !closeBtn || !mobileMenu) return;
+
+    // Setup initial state
+    gsap.set(mobileMenu, { autoAlpha: 0 });
+    gsap.set(mobileLinks, { y: 50, opacity: 0 });
+
+    const menuTl = gsap.timeline({ paused: true, reversed: true });
+    
+    menuTl.to(mobileMenu, {
+        duration: 0.5,
+        autoAlpha: 1,
+        ease: "power3.inOut"
+    })
+    .to(mobileLinks, {
+        duration: 0.4,
+        y: 0,
+        opacity: 1,
+        stagger: 0.1,
+        ease: "back.out(1.7)"
+    }, "-=0.2");
+
+    hamburgerBtn.addEventListener('click', () => {
+        menuTl.play();
+        document.body.style.overflow = 'hidden';
+    });
+
+    closeBtn.addEventListener('click', () => {
+        menuTl.reverse();
+        document.body.style.overflow = '';
+    });
+
+    // Close menu when a link is clicked
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            menuTl.reverse();
+            document.body.style.overflow = '';
+        });
+    });
+}
 
 /**
  * Moving Image Hover: GSAP logic for floating images on showcase items.
