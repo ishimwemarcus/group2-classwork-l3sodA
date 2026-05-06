@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sacha's Taste | The Art of Flame-Grilled Perfection</title>
-    <meta name="description"
-        content="Kigali's premier gourmet fast food delivery. Authentic flavors, premium ingredients, and unmatched delivery speed.">
-    <link rel="stylesheet" href="style.css?v=5">
+    <title>Sacha's Taste | Bold African Street Flavor</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <!-- GSAP for Smooth Animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
-
 <body class="loading">
 
     <!-- Premium Loader -->
@@ -24,282 +22,272 @@
         </div>
     </div>
 
-    <!-- Custom Cursor -->
-    <div id="custom-cursor" class="custom-cursor"></div>
-    <div id="cursor-follower" class="cursor-follower"></div>
 
-    <header id="main-header">
-        <div class="container nav-container">
-            <a href="#" class="nav-logo">
-                <img src="assets/brand-logo.png" alt="Sacha's Taste" class="main-logo-img">
-            </a>
-            <div class="nav-actions">
-                <a href="#opening" class="btn-primary" id="btn-opening">OPENING TIMES</a>
-                <a href="#find-us" class="btn-primary" id="btn-findus">FIND US</a>
-                <a href="#order" class="btn-white" id="btn-order">ORDER NOW</a>
-                <button class="btn-hamburger" id="hamburger-menu" aria-label="Menu">
-                    <span class="line"></span>
-                    <span class="line"></span>
-                </button>
+    <nav id="main-header">
+        <div class="nav-logo">
+            <img src="assets/brand-logo.png" alt="Sacha's Taste Logo">
+        </div>
+        <div class="nav-links">
+            <a href="#modal-opening" class="btn btn-outline" id="btn-opening">Opening Times</a>
+            <a href="#modal-findus" class="btn btn-outline" id="btn-findus">Find Us</a>
+            <a href="#sidebar-order" class="btn btn-primary" id="btn-order">Order Now</a>
+            <div class="menu-toggle" id="hamburger-menu">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay">
+        <div class="menu-close" id="menu-close-btn">&times;</div>
+        <div class="menu-links">
+            <a href="#hero" class="menu-link">Home</a>
+            <a href="#delivery" class="menu-link">Delivery</a>
+            <a href="#menu" class="menu-link">Menu</a>
+            <a href="#team" class="menu-link">Team</a>
+            <a href="#discover" class="menu-link">About Us</a>
+        </div>
+        <div class="menu-footer">
+            <p>SACHA'S TASTE — KIGALI</p>
+        </div>
+    </div>
+
+    <header class="hero" id="hero">
+        <div class="hero-grid">
+            <div class="hero-image-left reveal">
+                <img src="assets/CEO%20sacha.png" alt="Sacha, The Founder">
+            </div>
+            <div class="hero-center reveal">
+                <img src="assets/brand-logo.png" alt="Sacha's Taste" class="hero-logo">
+            </div>
+            <div class="hero-image-right reveal">
+                <img src="assets/sample_food%20(1).png" alt="Featured Dish">
+            </div>
+            <div class="hero-tagline reveal">
+                <h3>TASTE THE <br><span class="serif-italic">Deliciousness</span></h3>
+                <p>From flame-grilled meats to perfectly spiced sides, we bring the richness of our roots to every order. Fast, fresh, and full of soul.</p>
+                <p class="italic">— this is street flavor done right.</p>
             </div>
         </div>
     </header>
 
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="mobile-menu">
-        <div class="mobile-menu-inner">
-            <button id="close-menu" class="close-menu" aria-label="Close Menu">
-                <span class="line line1"></span>
-                <span class="line line2"></span>
-            </button>
-            <nav class="mobile-links">
-                <a href="#hero" class="mobile-link" data-text="HOME">HOME</a>
-                <a href="#story" class="mobile-link" data-text="OUR STORY">OUR STORY</a>
-                <a href="#menu" class="mobile-link" data-text="MENU">MENU</a>
-                <a href="#find-us" class="mobile-link" data-text="CONTACT">CONTACT</a>
-            </nav>
-            <div class="mobile-footer">
-                <p>Kigali, Rwanda</p>
-                <p>+250 123 456 789</p>
+    <section class="delivery" id="delivery">
+        <div class="container">
+            <div class="delivery-grid">
+                <div class="delivery-content reveal">
+                    <p class="delivery-message">
+                        We saw a need for better, more authentic food experience in Kigali. Inspired by vibrant markets and late-night street grills. We blend traditional spices, quality ingredients, and bold techniques to create meals that feel both nostalgic and new.
+                    </p>
+                    <h2>REAL FAST FOOD<br><span class="italic">DELIVERY</span></h2>
+                </div>
+                <div class="delivery-image reveal">
+                    <img src="assets/delivery%20service.jpg" alt="Fast Food Delivery">
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <main>
-        <!-- Hero Section -->
-        <section id="hero" class="hero">
-            <div class="container">
-                <div class="hero-content reveal">
-                    <span class="hero-tag">AUTHENTIC & PREMIUM</span>
-                    <h1>TASTE THE <br><span class="serif-italic">Deliciousness</span></h1>
-                    <p class="hero-description">From flame-grilled meats to perfectly spiced sides, we bring the
-                        richness of our roots to every order in Kigali.</p>
-                    <div class="hero-actions">
-                        <a href="#menu" class="btn-cta">EXPLORE THE MENU</a>
-                    </div>
-                </div>
-            </div>
-            <div class="hero-images">
-                <div class="hero-bg-accent"></div>
-                <img src="assets/CEO sacha.png" alt="Sacha - CEO of Sacha's Taste" class="hero-ceo" loading="lazy">
-            </div>
-        </section>
-
-        <!-- Features Section -->
-        <section class="section-padding">
-            <div class="container">
-                <div class="features-grid">
-                    <div class="feature-card reveal">
-                        <div class="feature-icon">
-                            <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
-                        </div>
-                        <h3>Flame Grilled</h3>
-                        <p>Authentic techniques passed down through generations, ensuring every bite is smoke-kissed perfection.</p>
-                    </div>
-                    <div class="feature-card reveal">
-                        <div class="feature-icon">
-                            <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path><path d="M2 21c0-3 1.85-5.36 5.08-6C10 14.5 12 15 15 15"></path></svg>
-                        </div>
-                        <h3>Pure Ingredients</h3>
-                        <p>We source only the finest local produce and premium meats, because quality is non-negotiable.</p>
-                    </div>
-                    <div class="feature-card reveal">
-                        <div class="feature-icon">
-                            <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
-                        </div>
-                        <h3>Flash Delivery</h3>
-                        <p>Heat-locked packaging and a dedicated fleet ensure your meal arrives exactly as the chef intended.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Story Section -->
-        <section id="story" class="section-padding">
-            <div class="container story">
-                <div class="story-image reveal">
-                    <img src="assets/sample_food (6).png" alt="Artisan food preparation" loading="lazy">
-                </div>
-                <div class="story-content reveal">
-                    <span class="hero-tag">THE LEGACY</span>
-                    <h2>OUR BEST ONE <br><span class="serif-italic">Yet!</span></h2>
-                    <p>We saw a need for better, more authentic food experience in Kigali. Inspired by vibrant markets
-                        and late-night street grills, we blend traditional spices with modern techniques.</p>
-                    <p>Sacha's Taste, brought to life by Marcus and our dedicated team, is the result of our passion to bring happiness to you through phenomenal food,
-                        an unforgettable experience and our desire to be the absolute best at what we do.</p>
-                    <a href="#menu" class="btn-cta">READ OUR STORY</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Showcase Section -->
-        <section id="menu" class="section-padding">
-            <div class="container">
-                <div class="showcase-header reveal">
-                    <h2>THE <span class="serif-italic">Showcase</span></h2>
-                </div>
-                <div class="showcase-grid">
-                    <div class="showcase-item reveal" data-image="assets/sample_food (5).png">
-                        <img src="assets/sample_food (5).png" alt="The Sacha Tray - Signature Platter" loading="lazy">
-                        <div class="showcase-overlay">
-                            <span class="showcase-tag">SIGNATURE</span>
-                            <h3>THE SACHA TRAY</h3>
-                        </div>
-                        <div class="floating-img-wrapper">
-                            <img src="assets/sample_food (5).png" alt="" class="floating-img">
-                        </div>
-                    </div>
-                    <div class="showcase-item reveal" data-image="assets/packaging (2).jpg">
-                        <img src="assets/packaging (2).jpg" alt="Sacha's Taste Premium Eco-friendly Packaging"
-                            loading="lazy">
-                        <div class="showcase-overlay">
-                            <span class="showcase-tag">EXPERIENCE</span>
-                            <h3>PREMIUM PACKAGING</h3>
-                        </div>
-                        <div class="floating-img-wrapper">
-                            <img src="assets/packaging (2).jpg" alt="" class="floating-img">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer id="find-us">
+    <section class="best-one" id="best-one">
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <h2>SACHA'S <br><span class="serif-italic">Taste</span></h2>
-                    <p>Bringing authentic flame-grilled flavor to the heart of Kigali.</p>
+            <div class="best-grid">
+                <div class="best-content reveal">
+                    <h3 class="section-subtitle">BEYOND ORDINARY</h3>
+                    <p>We can confidently say that there is nobody else like us out there. We've built on total authenticity - genuine ingredients.</p>
+                    <p>This - teamed with absolute consistency that produces incredible results every time and a team of good, honest people who love to deliver a great customer experience.</p>
+                    <p>Sacha's Taste is the result of our dedication to bring happiness to you through phenomenal food, an unforgettable experience and our desire to be the absolute best at what we do.</p>
+                    <p class="best-quote serif-italic">Taste the deliciousness.</p>
                 </div>
-                <div class="footer-links">
-                    <h4>EXPLORE</h4>
+                <div class="best-headline reveal">
+                    <h2>OUR BEST ONE<br><span class="italic">YET!</span></h2>
+                    <img src="assets/sample_food%20(1).png" alt="Our Best Dish">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="menu-section" id="menu">
+        <div class="container">
+            <h2 class="reveal">CHECK OUT THE <span class="italic">MENU</span></h2>
+            
+            <div class="menu-list">
+                <div class="menu-item reveal" data-image="assets/sample_food%20(1).png">
+                    <div class="menu-item-info">
+                        <h4>NEW RICE Recipe</h4>
+                        <p>A vibrant new take on rice — seasoned, satisfying, and made to elevate every meal.</p>
+                    </div>
+                    <img src="assets/sample_food%20(1).png" alt="New Rice Recipe" class="menu-thumb">
+                    <div class="floating-img-wrapper">
+                        <img src="assets/sample_food%20(1).png" alt="" class="floating-img">
+                    </div>
+                </div>
+                <div class="menu-item reveal" data-image="assets/sample_food%20(3).jpg">
+                    <div class="menu-item-info">
+                        <h4>FLAME GRILLED CHICKEN</h4>
+                        <p>Our signature chicken, marinated in secret spices and grilled over open flames.</p>
+                    </div>
+                    <img src="assets/sample_food%20(3).jpg" alt="Flame Grilled Chicken" class="menu-thumb">
+                    <div class="floating-img-wrapper">
+                        <img src="assets/sample_food%20(3).jpg" alt="" class="floating-img">
+                    </div>
+                </div>
+                <div class="menu-item reveal" data-image="assets/sample_food%20(4).jpg">
+                    <div class="menu-item-info">
+                        <h4>SACHA'S SIGNATURE TRAY</h4>
+                        <p>A feast for the senses — the ultimate selection of our best meats and sides.</p>
+                    </div>
+                    <img src="assets/sample_food%20(4).jpg" alt="Signature Tray" class="menu-thumb">
+                    <div class="floating-img-wrapper">
+                        <img src="assets/sample_food%20(4).jpg" alt="" class="floating-img">
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-details reveal">
+                <div class="menu-category">
+                    <h4>COMBOS & SPECIALS</h4>
                     <ul>
-                        <li><a href="#hero">Home</a></li>
-                        <li><a href="#story">Our Story</a></li>
-                        <li><a href="#menu">Menu</a></li>
+                        <li>Flame Grill Combo <span>15,000 RWF</span></li>
+                        <li>Suya Supreme Meal <span>12,500 RWF</span></li>
+                        <li>Family Feast Box <span>45,000 RWF</span></li>
+                        <li>Street King Special <span>10,000 RWF</span></li>
+                    </ul>
+                    <br><br>
+                    <h4>SALADS & SIDES</h4>
+                    <ul>
+                        <li>Afro Crunch Salad <span>5,500 RWF</span></li>
+                        <li>Golden Spiced Fries <span>3,500 RWF</span></li>
+                        <li>Fried Plantain (Dodo) <span>4,000 RWF</span></li>
+                        <li>Jollof Rice <span>6,000 RWF</span></li>
                     </ul>
                 </div>
-                <div class="footer-links">
-                    <h4>SOCIAL</h4>
+                <div class="menu-category">
+                    <h4>SAUCES</h4>
                     <ul>
-                        <li><a href="#">Instagram</a></li>
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">Facebook</a></li>
+                        <li>Smoky Suya Sauce <span>1,500 RWF</span></li>
+                        <li>Spicy Peri-Peri <span>1,500 RWF</span></li>
+                        <li>Creamy Garlic & Herb <span>1,500 RWF</span></li>
+                        <li>Sweet Chili Heat <span>1,500 RWF</span></li>
                     </ul>
-                </div>
-                <div class="footer-links">
-                    <h4>CONTACT</h4>
+                    <br><br>
+                    <h4>DRINKS</h4>
                     <ul>
-                        <li>Kigali, Rwanda</li>
-                        <li>+250 123 456 789</li>
-                        <li>hello@sachastaste.com</li>
+                        <li>Fresh Zobo (Hibiscus) <span>3,500 RWF</span></li>
+                        <li>Homemade Ginger Drink <span>3,500 RWF</span></li>
+                        <li>Chilled Soft Drinks <span>2,000 RWF</span></li>
                     </ul>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 SACHA'S TASTE. ALL RIGHTS RESERVED.</p>
-                <p>CRAFTED BY MARCUS & ANTIGRAVITY</p>
+        </div>
+    </section>
+
+    <section class="team" id="team">
+        <div class="container">
+            <h2 class="reveal">MEET THE <span>TEAM</span></h2>
+            <div class="team-grid">
+                <div class="team-card reveal">
+                    <img src="assets/CEO%20sacha.jpg" alt="Sacha - Founder">
+                    <h4>SACHA</h4>
+                    <p>The visionary behind the taste. With a passion for authentic flavors and decade of experience.</p>
+                </div>
+                <div class="team-card reveal">
+                    <img src="assets/CEO%20sacha.jpg" alt="Team Member">
+                    <h4>Owner</h4>
+                    <p>Head of Operations. Ensuring every order is delivered with perfection and speed.</p>
+                </div>
+                <div class="team-card reveal">
+                    <img src="assets/CEO%20sacha.jpg" alt="Team Member">
+                    <h4>THE GRILL MASTERS</h4>
+                    <p>Our dedicated team of chefs who bring the flame-grilled magic to life every single day.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="discover" id="discover">
+        <div class="container">
+            <h2 class="reveal">DISCOVER <span>US</span></h2>
+            <div class="discover-grid">
+                <div class="discover-content reveal">
+                    <h4>Real African flavor<br>No shortcuts<br>No compromises</h4>
+                    <p>We didn't come here to play it safe or follow trends. We came to show you what happens when passion meets tradition — when every spice, every ingredient, and every detail matters. Mediocrity isn't in our menu. This is fast food with its soul intact.</p>
+                </div>
+                <div class="discover-image reveal">
+                    <img src="assets/packaging%20(3).jpg" alt="Sacha's Packaging">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-top reveal">
+                <h2 class="footer-trust">TRUST</h2>
+                <div class="footer-tagline">Taste the deliciousness</div>
+            </div>
+            <h1 class="footer-main-logo reveal">SACHA's TASTE</h1>
+            <div class="footer-bottom reveal">
+                <p>&copy; 2026 Sacha's Taste. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <!-- Back to Top Button -->
-    <button id="back-to-top" class="back-to-top">
-        <span class="arrow-up">↑</span>
-    </button>
+    <button id="back-to-top" class="back-to-top">↑</button>
 
-    <!-- Opening Times Modal -->
+    <!-- Modals (Re-integrated) -->
     <div id="modal-opening" class="modal-overlay">
         <div class="modal-backdrop"></div>
         <div class="modal-content">
             <button class="close-modal">&times;</button>
-            <span class="showcase-tag">SCHEDULE</span>
-            <h2>OPENING <span class="serif-italic">Times</span></h2>
-            
-            <div class="calendar-widget">
-                <div class="calendar-header">
-                    <span>May 2026</span>
-                    <div class="calendar-nav">‹ ›</div>
-                </div>
-                <div class="calendar-days">
-                    <span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>
-                    <span class="muted">27</span><span class="muted">28</span><span class="muted">29</span><span class="muted">30</span><span>1</span><span>2</span><span>3</span>
-                    <span>4</span><span class="active">5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
-                </div>
-            </div>
-
-            <div class="schedule-grid">
-                <div class="schedule-row">
-                    <span>Monday - Thursday</span>
-                    <span>11:00 AM - 10:00 PM</span>
-                </div>
-                <div class="schedule-row">
-                    <span>Friday - Saturday</span>
-                    <span>10:00 AM - 11:30 PM</span>
-                </div>
-                <div class="schedule-row">
-                    <span>Sunday</span>
-                    <span>12:00 PM - 9:00 PM</span>
-                </div>
+            <h2 style="margin-bottom: 2rem; color: var(--orange); text-align: center;">OPENING TIMES</h2>
+            <div style="font-size: 1.2rem; line-height: 2; text-align: center;">
+                <p>Monday - Thursday: 10:00 AM - 10:00 PM</p>
+                <p>Friday - Saturday: 10:00 AM - 12:00 AM</p>
+                <p>Sunday: 12:00 PM - 9:00 PM</p>
             </div>
         </div>
     </div>
 
-    <!-- Find Us Modal -->
     <div id="modal-findus" class="modal-overlay">
         <div class="modal-backdrop"></div>
         <div class="modal-content">
             <button class="close-modal">&times;</button>
-            <span class="showcase-tag">LOCATION</span>
-            <h2>FIND <span class="serif-italic">Us</span></h2>
-            <p class="modal-desc">123 Flame Avenue, Kigali, Rwanda</p>
-            <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127606.58156157833!2d30.0076295!3d-1.954753!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19dca4258ed8e797%3A0xf32236814c173516!2sKigali%2C%20Rwanda!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" width="100%" height="250" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <h2 style="margin-bottom: 2rem; color: var(--orange); text-align: center;">FIND US</h2>
+            <div style="font-size: 1.2rem; line-height: 1.6; text-align: center;">
+                <p style="margin-bottom: 2rem; opacity: 0.8;">Kigali Heights, Ground Floor<br>KG 7 Ave, Kigali, Rwanda</p>
+                <div class="social-contact-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem;">
+                    <a href="https://wa.me/0788436863" target="_blank" style="color: var(--white); text-decoration: none; transition: var(--transition); display: block;">
+                        <i class="fab fa-whatsapp" style="font-size: 2.5rem; color: #25D366; display: block; margin-bottom: 0.5rem;"></i>
+                        <span style="font-size: 0.7rem; font-weight: 700; display: block;">WHATSAPP</span>
+                    </a>
+                    <a href="https://instagram.com/sachas_taste/" target="_blank" style="color: var(--white); text-decoration: none; transition: var(--transition); display: block;">
+                        <i class="fab fa-instagram" style="font-size: 2.5rem; color: #E4405F; display: block; margin-bottom: 0.5rem;"></i>
+                        <span style="font-size: 0.7rem; font-weight: 700; display: block;">INSTAGRAM</span>
+                    </a>
+                    <a href="tel:0788436863" style="color: var(--white); text-decoration: none; transition: var(--transition); display: block;">
+                        <i class="fas fa-phone-alt" style="font-size: 2.5rem; color: var(--orange); display: block; margin-bottom: 0.5rem;"></i>
+                        <span style="font-size: 0.7rem; font-weight: 700; display: block;">CALL US</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Order Sidebar -->
     <div id="sidebar-order" class="sidebar-overlay">
         <div class="sidebar-backdrop"></div>
         <div class="sidebar-content">
             <button class="close-sidebar">&times;</button>
-            <span class="showcase-tag">DELIVERY & PICKUP</span>
-            <h2>ORDER <span class="serif-italic">Now</span></h2>
-            <p class="modal-desc">Add items to your cart for quick delivery.</p>
-            <div class="mini-menu">
-                <div class="mini-menu-item">
-                    <img src="assets/sample_food (5).png" alt="Sacha Tray">
-                    <div class="mini-menu-info">
-                        <h4>The Sacha Tray</h4>
-                        <span>25,000 RWF</span>
-                    </div>
-                    <button class="add-to-cart">+</button>
-                </div>
-                <div class="mini-menu-item">
-                    <img src="assets/sample_food (1).png" alt="Flame Grilled Chicken">
-                    <div class="mini-menu-info">
-                        <h4>Flame Grilled Chicken</h4>
-                        <span>12,000 RWF</span>
-                    </div>
-                    <button class="add-to-cart">+</button>
-                </div>
-                <div class="mini-menu-item">
-                    <img src="assets/sample_food (6).png" alt="Spicy Wings">
-                    <div class="mini-menu-info">
-                        <h4>Spicy Wings (6pcs)</h4>
-                        <span>8,500 RWF</span>
-                    </div>
-                    <button class="add-to-cart">+</button>
-                </div>
+            <h2 style="margin-bottom: 3rem; color: var(--orange);">ORDER NOW</h2>
+            <p style="margin-bottom: 2rem;">Choose your preferred delivery platform:</p>
+            <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                <a href="#" class="btn btn-white">Vuba Vuba</a>
+                <a href="#" class="btn btn-white">Foodpanda</a>
+                <a href="#" class="btn btn-white">Direct Order (WhatsApp)</a>
             </div>
-            
-            <a href="#" class="btn-primary checkout-btn" style="margin-top: 30px; display: block; width: 100%;">PROCEED TO CHECKOUT</a>
         </div>
     </div>
 
-    <script src="script.js?v=5"></script>
+    <script src="script.js"></script>
 </body>
-
 </html>

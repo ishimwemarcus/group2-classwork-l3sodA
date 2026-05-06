@@ -4,158 +4,149 @@ document.addEventListener('DOMContentLoaded', () => {
     initRevealAnimations();
     initSmoothScrolling();
     initMagneticButtons();
-    initHeroParallax();
-    initCustomCursor();
     initBackToTop();
-    initMovingImageHover();
-    initMobileMenu();
+    initMenuImageHover();
     initModalsAndSidebar();
+    initMobileMenu();
 });
 
 /**
- * Mobile Menu: GSAP powered full screen menu overlay.
+ * Premium Loader: Simulates loading and then reveals content.
  */
-function initMobileMenu() {
-    const hamburgerBtn = document.getElementById('hamburger-menu');
-    const closeBtn = document.getElementById('close-menu');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileLinks = document.querySelectorAll('.mobile-link');
-    
-    if (!hamburgerBtn || !closeBtn || !mobileMenu) return;
+function initLoader() {
+    const loader = document.getElementById('loader');
+    const progressBar = document.querySelector('.loader-progress');
+    const body = document.body;
 
-    // Setup initial state
-    gsap.set(mobileMenu, { autoAlpha: 0 });
-    gsap.set(mobileLinks, { y: 50, opacity: 0 });
+    if (!loader || !progressBar) return;
 
-    const menuTl = gsap.timeline({ paused: true, reversed: true });
-    
-    menuTl.to(mobileMenu, {
-        duration: 0.5,
-        autoAlpha: 1,
-        ease: "power3.inOut"
-    })
-    .to(mobileLinks, {
-        duration: 0.4,
-        y: 0,
-        opacity: 1,
-        stagger: 0.1,
-        ease: "back.out(1.7)"
-    }, "-=0.2");
+    let progress = 0;
+    const interval = setInterval(() => {
+        progress += Math.random() * 25;
+        if (progress > 100) progress = 100;
+        
+        progressBar.style.width = `${progress}%`;
 
-    hamburgerBtn.addEventListener('click', () => {
-        menuTl.play();
-        document.body.style.overflow = 'hidden';
-    });
+        if (progress === 100) {
+            clearInterval(interval);
+            setTimeout(() => {
+                gsap.to(loader, {
+                    opacity: 0,
+                    duration: 0.8,
+                    ease: "power2.inOut",
+                    onComplete: () => {
+                        loader.style.visibility = 'hidden';
+                        body.classList.remove('loading');
+                    }
+                });
+            }, 500);
+        }
+    }, 150);
+}
 
-    closeBtn.addEventListener('click', () => {
-        menuTl.reverse();
-        document.body.style.overflow = '';
-    });
+/**
+ * Header scroll effect: Changes background on scroll.
+ */
+function initHeaderScroll() {
+    const header = document.getElementById('main-header');
+    if (!header) return;
 
-    // Close menu when a link is clicked
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            menuTl.reverse();
-            document.body.style.overflow = '';
-        });
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
     });
 }
 
 /**
- * Modals and Sidebar: GSAP powered popups for Opening, Find Us, and Order Now.
+ * Reveal Animation: Elements with 'reveal' class fade in on scroll.
+ */
+function initRevealAnimations() {
+    const revealElements = document.querySelectorAll('.reveal');
+    const observerOptions = {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    revealElements.forEach(el => revealObserver.observe(el));
+}
+
+
+/**
+ * Modals and Sidebar: GSAP powered transitions.
  */
 function initModalsAndSidebar() {
-    // Selectors
-    const btnOpening = document.getElementById('btn-opening');
-    const modalOpening = document.getElementById('modal-opening');
-    
-    const btnFindUs = document.getElementById('btn-findus');
-    const modalFindUs = document.getElementById('modal-findus');
-    
-    const btnOrder = document.getElementById('btn-order');
-    const sidebarOrder = document.getElementById('sidebar-order');
+    const triggers = [
+        { btn: 'btn-opening', target: 'modal-opening', type: 'modal' },
+        { btn: 'btn-findus', target: 'modal-findus', type: 'modal' },
+        { btn: 'btn-order', target: 'sidebar-order', type: 'sidebar' }
+    ];
 
-    // Helper function to create GSAP timeline for modals
-    const createModalTimeline = (overlay) => {
-        if (!overlay) return null;
+    triggers.forEach(item => {
+        const btn = document.getElementById(item.btn);
+        const overlay = document.getElementById(item.target);
+        if (!btn || !overlay) return;
+
         const backdrop = overlay.querySelector('.modal-backdrop') || overlay.querySelector('.sidebar-backdrop');
         const content = overlay.querySelector('.modal-content') || overlay.querySelector('.sidebar-content');
         const closeBtn = overlay.querySelector('.close-modal') || overlay.querySelector('.close-sidebar');
-        
-        gsap.set(overlay, { pointerEvents: "none" });
 
-        const tl = gsap.timeline({ paused: true, reversed: true });
-        
-        // For Modals
-        if (overlay.classList.contains('modal-overlay')) {
-            tl.set(overlay, { pointerEvents: "auto" })
-              .to(backdrop, { duration: 0.4, opacity: 1, ease: "power2.inOut" })
-              .to(content, { duration: 0.5, opacity: 1, y: 0, scale: 1, ease: "back.out(1.5)" }, "-=0.2");
-        } 
-        // For Sidebar
-        else if (overlay.classList.contains('sidebar-overlay')) {
-            tl.set(overlay, { pointerEvents: "auto" })
-              .to(backdrop, { duration: 0.4, opacity: 1, ease: "power2.inOut" })
-              .to(content, { duration: 0.5, x: 0, ease: "power3.out" }, "-=0.3");
+        const tl = gsap.timeline({ paused: true });
+
+        if (item.type === 'modal') {
+            tl.to(backdrop, { opacity: 1, duration: 0.4 })
+              .to(content, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(1.5)" }, "-=0.2");
+        } else {
+            tl.to(backdrop, { opacity: 1, duration: 0.4 })
+              .to(content, { x: 0, duration: 0.6, ease: "power3.out" }, "-=0.3");
         }
 
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            overlay.style.pointerEvents = 'auto';
+            tl.play();
+            document.body.style.overflow = 'hidden';
+        });
+
         const close = () => {
-            tl.reverse();
+            tl.reverse().then(() => {
+                overlay.style.pointerEvents = 'none';
+            });
             document.body.style.overflow = '';
         };
 
         if (closeBtn) closeBtn.addEventListener('click', close);
         if (backdrop) backdrop.addEventListener('click', close);
-
-        return tl;
-    };
-
-    const tlOpening = createModalTimeline(modalOpening);
-    const tlFindUs = createModalTimeline(modalFindUs);
-    const tlOrder = createModalTimeline(sidebarOrder);
-
-    // Event Listeners
-    if (btnOpening && tlOpening) {
-        btnOpening.addEventListener('click', (e) => {
-            e.preventDefault();
-            document.body.style.overflow = 'hidden';
-            tlOpening.play();
-        });
-    }
-
-    if (btnFindUs && tlFindUs) {
-        btnFindUs.addEventListener('click', (e) => {
-            e.preventDefault();
-            document.body.style.overflow = 'hidden';
-            tlFindUs.play();
-        });
-    }
-
-    if (btnOrder && tlOrder) {
-        btnOrder.addEventListener('click', (e) => {
-            e.preventDefault();
-            document.body.style.overflow = 'hidden';
-            tlOrder.play();
-        });
-    }
+    });
 }
 
 /**
- * Moving Image Hover: GSAP logic for floating images on showcase items.
+ * Menu Image Hover: Following image effect for menu items.
  */
-function initMovingImageHover() {
-    const items = document.querySelectorAll('.showcase-item');
+function initMenuImageHover() {
+    const menuItems = document.querySelectorAll('.menu-item');
     
-    items.forEach(item => {
+    menuItems.forEach(item => {
         const wrapper = item.querySelector('.floating-img-wrapper');
-        
+        if (!wrapper) return;
+
         item.addEventListener('mousemove', (e) => {
             const { clientX, clientY } = e;
             
-            // GSAP for ultra-smooth movement following the cursor
             gsap.to(wrapper, {
-                x: clientX - 125, // Offset to center the 250px wide image
-                y: clientY - 90,  // Offset to center the 180px high image
+                x: clientX - 125,
+                y: clientY - 90,
                 duration: 0.6,
                 ease: "power3.out"
             });
@@ -182,139 +173,49 @@ function initMovingImageHover() {
 }
 
 /**
- * Premium Loader: Simulates loading and then reveals content.
+ * Magnetic Buttons: Subtle interaction for CTA.
  */
-function initLoader() {
-    const loader = document.getElementById('loader');
-    const progressBar = document.querySelector('.loader-progress');
-    const body = document.body;
-
-    if (!loader || !progressBar) return;
-
-    let progress = 0;
-    const interval = setInterval(() => {
-        progress += Math.random() * 30;
-        if (progress > 100) progress = 100;
-        
-        progressBar.style.width = `${progress}%`;
-
-        if (progress === 100) {
-            clearInterval(interval);
-            setTimeout(() => {
-                loader.style.opacity = '0';
-                loader.style.visibility = 'hidden';
-                body.classList.remove('loading');
-            }, 500);
-        }
-    }, 200);
-}
-
-/**
- * Custom Cursor: Smoothly following dot and ring.
- */
-function initCustomCursor() {
-    const cursor = document.getElementById('custom-cursor');
-    const follower = document.getElementById('cursor-follower');
+function initMagneticButtons() {
+    const buttons = document.querySelectorAll('.btn');
     
-    if (!cursor || !follower) return;
+    buttons.forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = (e.clientX - rect.left - rect.width / 2) * 0.3;
+            const y = (e.clientY - rect.top - rect.height / 2) * 0.3;
 
-    window.addEventListener('mousemove', (e) => {
-        const { clientX, clientY } = e;
-        
-        cursor.style.left = `${clientX}px`;
-        cursor.style.top = `${clientY}px`;
-        
-        follower.style.left = `${clientX}px`;
-        follower.style.top = `${clientY}px`;
-    });
-
-    // Hover effects
-    const hoverables = document.querySelectorAll('a, button, .showcase-item');
-    hoverables.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            follower.style.width = '80px';
-            follower.style.height = '80px';
-            follower.style.background = 'rgba(255, 95, 0, 0.1)';
+            gsap.to(btn, {
+                x: x,
+                y: y,
+                duration: 0.3,
+                ease: "power2.out"
+            });
         });
-        el.addEventListener('mouseleave', () => {
-            follower.style.width = '40px';
-            follower.style.height = '40px';
-            follower.style.background = 'transparent';
+
+        btn.addEventListener('mouseleave', () => {
+            gsap.to(btn, {
+                x: 0,
+                y: 0,
+                duration: 0.5,
+                ease: "elastic.out(1, 0.3)"
+            });
         });
     });
 }
 
 /**
- * Back to Top: Shows/hides button based on scroll position.
- */
-function initBackToTop() {
-    const btn = document.getElementById('back-to-top');
-    if (!btn) return;
-
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 500) {
-            btn.classList.add('visible');
-        } else {
-            btn.classList.remove('visible');
-        }
-    });
-
-    btn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-}
-
-/**
- * Header scroll effect: Adds 'scrolled' class when page is scrolled down.
- */
-function initHeaderScroll() {
-    const header = document.getElementById('main-header');
-    if (!header) return;
-
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
-}
-
-/**
- * Reveal Animation: Elements with 'reveal' class fade in on scroll.
- */
-function initRevealAnimations() {
-    const revealElements = document.querySelectorAll('.reveal');
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                revealObserver.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    revealElements.forEach(el => revealObserver.observe(el));
-}
-
-/**
- * Smooth Scrolling: For all internal anchor links.
+ * Smooth Scrolling: For all internal links.
  */
 function initSmoothScrolling() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            e.preventDefault();
             const targetId = this.getAttribute('href');
-            if (targetId === '#' || !targetId.startsWith('#')) return;
+            if (targetId.startsWith('#modal') || targetId.startsWith('#sidebar')) return;
             
+            e.preventDefault();
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
-                const headerOffset = 100;
+                const headerOffset = 80;
                 const elementPosition = targetElement.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -328,43 +229,64 @@ function initSmoothScrolling() {
 }
 
 /**
- * Magnetic Button Effect: Premium interaction for CTA buttons.
+ * Back to Top: Simple visibility toggle.
  */
-function initMagneticButtons() {
-    const buttons = document.querySelectorAll('.btn-cta');
-    
-    buttons.forEach(btn => {
-        btn.addEventListener('mousemove', (e) => {
-            const rect = btn.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
+function initBackToTop() {
+    const btn = document.getElementById('back-to-top');
+    if (!btn) return;
 
-            btn.style.transform = `translate(${x * 0.3}px, ${y * 0.5}px)`;
-        });
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 800) {
+            btn.classList.add('visible');
+        } else {
+            btn.classList.remove('visible');
+        }
+    });
 
-        btn.addEventListener('mouseleave', () => {
-            btn.style.transform = `translate(0, 0)`;
-        });
+    btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 }
 
 /**
- * Hero Parallax: Subtle movement for floating food and background elements.
+ * Mobile Menu Logic: Handle full-screen menu overlay.
  */
-function initHeroParallax() {
-    const hero = document.getElementById('hero');
-    const floatFood = document.querySelector('.hero-food-float');
-    
-    if (!hero || !floatFood) return;
+function initMobileMenu() {
+    const hamburger = document.getElementById('hamburger-menu');
+    const overlay = document.getElementById('mobile-menu-overlay');
+    const closeBtn = document.getElementById('menu-close-btn');
+    const menuLinks = document.querySelectorAll('.menu-link');
 
-    hero.addEventListener('mousemove', (e) => {
-        const { clientX, clientY } = e;
-        const centerX = window.innerWidth / 2;
-        const centerY = window.innerHeight / 2;
-        
-        const moveX = (clientX - centerX) / 50;
-        const moveY = (clientY - centerY) / 50;
+    if (!hamburger || !overlay) return;
 
-        floatFood.style.transform = `translate(${moveX}px, ${moveY}px) rotate(${5 + moveX * 0.1}deg)`;
+    hamburger.addEventListener('click', () => {
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
     });
+
+    const closeMenu = () => {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    };
+
+    if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+    
+    menuLinks.forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+}
+
+/**
+ * Hero Slideshow: Auto-change images in the hero section.
+ */
+function initHeroSlideshow() {
+    const slides = document.querySelectorAll('.hero-image-right .slide');
+    if (slides.length === 0) return;
+    
+    let currentSlide = 0;
+    setInterval(() => {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+    }, 4000);
 }
